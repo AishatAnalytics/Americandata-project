@@ -1,0 +1,59 @@
+---
+title: "Assignment 6"
+author: "Aishat Olatunji"
+date: "2022-09-29"
+output: word_document
+---
+
+```{r}
+
+data = read.csv("/Users/aishatolatunji/Downloads/Americandata.csv")
+head(data)
+dim(data)
+# removing the categorical colum i.e the first column
+data=data[-1]
+head(data)
+dim(data)
+#conversion to matrix form
+data_matrix<- data.matrix(data)
+rownames(data_matrix)<-c("yes","No")
+data_matrix
+# obtaining the chi square
+
+library(gmodels)
+CrossTable(data_matrix,chisq=TRUE,expected=TRUE,sresid=TRUE,format="SPSS")
+
+     ##  Reports
+
+#   Chi^2 =  936.1395     d.f. =  7     p =  7.523435e-198 
+#  Minimum expected frequency: 17.09279 
+       
+# chi-squared = 936.1395 
+# degrees of freedom  = (8-1) = 7
+# p. value = 7.523435e-198 
+
+# hypothesis testing
+# Ho : The type of profession related to the happiness of american people is not statistically significant
+
+# H1 : The type of profession related to the happiness of american people is statistically significant
+
+# Decision rule: since the pvalue(7.523435e-198 ) < alpha we reject the null hypothesis (Ho) and conclude that the model is statistically significant.that is; the type of profession american people does is related to their happiness.
+
+##  The Minimum expected frequency is 17.09279  which shows that the expected frequency is greater than 5, therefore it shows that it follows the assumption of independence.
+
+
+## explaining the chi_squared 
+# since the chi-squared (936.1395) > critical region at 8degrees of freedom (15.507) we reject the null hypothesis and conclude that The chi- square also shows that they are the type of profession american people does is related to their happiness.
+
+   
+
+
+#   optional step
+
+# For the housewives based on the chi square contribution of 1.356 it shows that The type of profession related to the happiness of american people is random i.e independent.
+
+# ------- Final optional step
+
+# standard residual are referred to as a standard score, they are often defined mathematically as  the  differnce between observed and expected divided by the square root of an expected value and they are often used to determine which attributes contributes more to the significance of a chi square e.g lets use the happy housewives  as an example (78-68.371)/sqrt(68.371) = 1.164515 which from the output here shows that it isnt a major contributor.
+``` 
+
